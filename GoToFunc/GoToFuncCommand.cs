@@ -9,6 +9,9 @@ using System.ComponentModel.Design;
 using System.Globalization;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using EnvDTE80;
+using EnvDTE;
+using System.Diagnostics;
 
 namespace GoToFunc
 {
@@ -50,9 +53,28 @@ namespace GoToFunc
             if (commandService != null)
             {
                 var menuCommandID = new CommandID(CommandSet, CommandId);
-                var menuItem = new MenuCommand(this.MenuItemCallback, menuCommandID);
+                var menuItem = new OleMenuCommand(this.MenuItemCallback, menuCommandID);
                 commandService.AddCommand(menuItem);
+
+                menuItem.BeforeQueryStatus += (sender, evt) =>
+                {
+                    var item = (MenuCommand)sender;
+                    if (item == null)
+                        return;
+                    item.Visible = item.Enabled = CheckEnabled();
+                };
             }
+        }
+
+        private bool CheckEnabled()
+        {
+            DTE2 dte = Package.GetGlobalService(typeof(DTE)) as DTE2;
+            var ad = dte.ActiveDocument;
+
+            if (!dte.Solution.IsOpen)
+                return false;
+
+            return (dte.ActiveDocument != null && dte.ActiveDocument.Language == "CSharp");
         }
 
         /// <summary>

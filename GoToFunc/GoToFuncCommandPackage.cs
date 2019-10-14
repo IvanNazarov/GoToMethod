@@ -43,6 +43,7 @@ namespace GoToFunc
     [Guid(GoToFuncCommandPackage.PackageGuidString)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
     [ProvideBindingPath]
+    [ProvideAutoLoad("adfc4e64-0397-11d1-9f4e-00a0c911004f")]
     public sealed class GoToFuncCommandPackage : Package
     {
         /// <summary>

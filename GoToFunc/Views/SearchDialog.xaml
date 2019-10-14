@@ -72,12 +72,6 @@
                 Background="#323232">
             <ListView.ItemTemplate>
                 <DataTemplate x:Name="FuncTemplate" DataType="model:FuncItem">
-                    <Border 
-                        BorderThickness="2"
-                        BorderBrush="#AFACAB"
-                        Margin="0 0 0 1"
-                        Padding="3"
-                        Background="#323232">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="60px"/>
@@ -104,7 +98,6 @@
                                 <TextBlock Style="{StaticResource SmallTB}" Text="{Binding Class}"/>
                             </StackPanel>
                         </Grid>
-                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
