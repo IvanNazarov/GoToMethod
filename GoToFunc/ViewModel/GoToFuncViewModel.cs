@@ -42,13 +42,17 @@ namespace GoToFunc.ViewModel
 
         public RelayCommand<object> GoToFuncCommand
         {
-            get { return _goToFuncCommand ?? (_goToFuncCommand = new RelayCommand<object>((object p) => {
-                if(_selectedItem != null)
+            get
+            {
+                return _goToFuncCommand ?? (_goToFuncCommand = new RelayCommand<object>((object p) =>
                 {
-                    _ds.GoToLine(_selectedItem.Location);
-                    CloseCommand.Execute(p);
-                }
-            })) ; }
+                    if (_selectedItem != null)
+                    {
+                        _ds.GoToLine(_selectedItem.Location);
+                        CloseCommand.Execute(p);
+                    }
+                }));
+            }
         }
 
 

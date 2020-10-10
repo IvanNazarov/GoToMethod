@@ -15,6 +15,7 @@ namespace GoToFunc.DataAccess
     public class GoToFuncDataService
     {
         private DTE2 _dte;
+        private bool isSerching = false;
 
         public GoToFuncDataService(DTE2 dte)
         {
@@ -82,6 +83,14 @@ namespace GoToFunc.DataAccess
             }
             #endregion
             return items;
+        }
+
+        public async Task<IEnumerable<FuncItem>> GetFunctionsAsync(string searchString)
+        {
+            return await System.Threading.Tasks.Task.Factory.StartNew(() =>
+            {
+                return GetFunctions(searchString);
+            });
         }
     }
 }
